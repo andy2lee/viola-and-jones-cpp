@@ -1,0 +1,2 @@
+﻿  main.cpp
+c:\users\andylee\documents\visual studio 2015\projects\opencv_hw02\opencv_hw02\main.cpp(1): fatal error C1083: 無法開啟包含檔案: 'opencv2/core/core.hpp': No such file or directory

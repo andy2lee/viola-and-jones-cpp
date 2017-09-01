@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="原始程式檔">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mainclass.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="integral_image.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="feature_detecting.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="weight_calculating.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="threshold.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="weak_classifier.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="integral_image.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="database.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="feature_detecting.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="weight_calculating.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="save_temp_sorted.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="threshold.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="weak_classifier.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="error_rate.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="classifier_saving.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="detect_correct_wrong_table.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="results.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="opencv_hw02.rc">
+      <Filter>資源檔</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
