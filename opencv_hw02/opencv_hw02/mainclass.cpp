@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
 	cout << "now testing" << endl;
 	strong_classifier *st_clfer = new strong_classifier(result);
 	Mat image_testing;
-	image_testing = imread("faces_data/noface (1).bmp", CV_LOAD_IMAGE_GRAYSCALE);
+	image_testing = imread("faces_data/1 (8).bmp", CV_LOAD_IMAGE_GRAYSCALE);
 	int det_true_false_y_n;
 	det_true_false_y_n = 1;
 	database<int> *data_testing = new database<int>[1]();
