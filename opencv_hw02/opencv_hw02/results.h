@@ -4,7 +4,7 @@ template <class T>
 class results
 {
 public:
-	double *Et;
+	double *Et;//
 	int *t_point_t;
 	int *p_value_t;
 	double *threshold_t;
@@ -30,6 +30,14 @@ public:
 		for (int n = 0; n < Tt_training; n++) {
 			cout << Et[n] << "\t" << t_point_t[n] << "\t" << p_value_t[n] << "\t" << threshold_t[n] << "\t" << correct[n] << endl;
 		}
+	}
+
+	T output_Et() {
+		return Et;
+	}
+
+	int output_p(int i) {
+		return t_point_t[i];
 	}
 
 private:

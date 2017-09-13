@@ -22,6 +22,7 @@
     <ClCompile Include="feature_detecting.cpp" />
     <ClCompile Include="integral_image.cpp" />
     <ClCompile Include="mainclass.cpp" />
+    <ClCompile Include="strong_classifier.cpp" />
     <ClCompile Include="threshold.cpp" />
     <ClCompile Include="weak_classifier.cpp" />
     <ClCompile Include="weight_calculating.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="results.h" />
     <ClInclude Include="save_temp_sorted.h" />
+    <ClInclude Include="strong_classifier.h" />
     <ClInclude Include="threshold.h" />
     <ClInclude Include="weak_classifier.h" />
     <ClInclude Include="weight_calculating.h" />

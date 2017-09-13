@@ -16,6 +16,7 @@ Date: 8/28/2017
 #include "classifier_saving.h"
 #include "detect_correct_wrong_table.h"
 #include "results.h" ///cargos for testing
+#include "strong_classifier.h"
 
 using namespace std;
 using namespace cv;
@@ -24,7 +25,7 @@ int main(int argc, char **argv) {
 	int picture_nums = 110;
 	int human_face = 10, non_human_face = 100;
 	int feature_numbers = 0;
-	int Tt_training = 100;
+	int Tt_training = 5;
 	integral_image *inter_ig;
 	feature_detecting *ft_dt;
 	std::string to_s;
@@ -120,10 +121,40 @@ int main(int argc, char **argv) {
 		delete detect_y_n;
 	}
 	result->output_all_result();///cargos for testing
+
 	delete clfer_saving;
 	delete wt_cal;
 	cout << "====================" << endl;
 	cout << "end" << endl;
+
+	//version01 edit: add The final strong classifier for the function by using the cargos
+	cout << "now testing" << endl;
+	strong_classifier *st_clfer = new strong_classifier(result);
+	Mat image_testing;
+	image_testing = imread("faces_data/noface (1).bmp", CV_LOAD_IMAGE_GRAYSCALE);
+	int det_true_false_y_n;
+	det_true_false_y_n = 1;
+	database<int> *data_testing = new database<int>[1]();
+	(data_testing + 0)->initualize_array_image_array_integral(image_testing.rows, image_testing.cols, det_true_false_y_n);
+	(data_testing + 0)->store_pixel(image_testing);
+
+	for (int j_s = 0; j_s < image_testing.rows; j_s++) {
+		for (int i_s = 0; i_s < image_testing.cols; i_s++) {
+			inter_ig = new integral_image(i_s, j_s, data_testing + 0);
+			inter_ig->integral_working();
+			delete inter_ig;
+		}
+	}
+	feature_detecting *ft_dt_testing;
+	ft_dt_testing = new feature_detecting((data_testing + 0)->output_array_integral(), (data_testing + 0)->output_array_image(), (data_testing + 0)->output_array_feature(), image_testing.rows, image_testing.cols);
+	ft_dt_testing->save_to_database();
+	//strong classifier algorithm
+
+	for (int i = 0; i < Tt_training; i++) {
+		st_clfer->strong_classifier_processing(result->output_p(i), data_testing, i);
+	}
+	int ans = st_clfer->judgment_face();
+	cout << ans << endl;
 	waitKey(0);
 	system("pause");
 	return 0;
