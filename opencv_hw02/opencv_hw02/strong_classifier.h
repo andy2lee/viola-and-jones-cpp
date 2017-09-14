@@ -17,8 +17,8 @@ private:
 public:
 	strong_classifier(results<double> *);
 	~strong_classifier();
-	void strong_classifier_processing(int, database<int> *, int);
+	void strong_classifier_processing(int, database<int> *, int, int);
 	int judgment_face();
-	double ht_func(int, int, database<int> *);
+	double ht_func(int, int, database<int> *, int);
 };
 

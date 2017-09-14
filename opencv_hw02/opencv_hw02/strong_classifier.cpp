@@ -15,30 +15,26 @@ strong_classifier::~strong_classifier()
 {
 }
 
-void strong_classifier::strong_classifier_processing(int pivot_t_p, database<int> *data_testing, int i) {
-	cout << Et[i] << ";;" << pivot_t_p << endl;
+void strong_classifier::strong_classifier_processing(int pivot_t_p, database<int> *data_testing, int i, int i_input) {
+	//cout << Et[i] << ";;" << pivot_t_p << endl;
 	double Bt = Et[i] / (1.0 - Et[i]);
 	double alpha = log10(1.0 / Bt);
 
-	left_total = left_total + (alpha * ht_func(pivot_t_p, i, data_testing));
+	left_total = left_total + (alpha * ht_func(pivot_t_p, i, data_testing, i_input));
 	right_total = right_total + ((1.0 / 2.0) * alpha);
-	cout << left_total << " ; " << right_total << " ; " << (data_testing + 0)->select_output_pivot(pivot_t_p) << " ; " << pivot_t_p << " ; " << alpha << " ; " << Bt << " ; " << Et[i] << endl;
+	//cout << left_total << " ; " << right_total << " ; " << (data_testing + i_input)->select_output_pivot(pivot_t_p) << " ; " << pivot_t_p << " ; " << alpha << " ; " << Bt << " ; " << Et[i] << endl;
 }
 
 int strong_classifier::judgment_face() {
-	if (left_total >= right_total) {
+	if (left_total >= right_total)
 		return 1;
-	}
-	else {
+	else
 		return 0;
-	}
 }
 
-double strong_classifier::ht_func(int pivot_t_p, int i, database<int> *data_testing) {
-	if (p_value_t[i] * (data_testing + 0)->select_output_pivot(pivot_t_p) < p_value_t[i] * threshold_t[i]) {
+double strong_classifier::ht_func(int pivot_t_p, int i, database<int> *data_testing, int i_input) {
+	if (p_value_t[i] * (data_testing + i_input)->select_output_pivot(pivot_t_p) < p_value_t[i] * threshold_t[i])
 		return 1.0;
-	}
-	else {
+	else
 		return 0.0;
-	}
 }
