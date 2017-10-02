@@ -17,29 +17,35 @@ Date: 8/28/2017
 #include "detect_correct_wrong_table.h"
 #include "results.h" ///cargos for testing
 #include "strong_classifier.h"
+#include <time.h>
 
 using namespace std;
 using namespace cv;
 
 int main(int argc, char **argv) {
-	int picture_nums = 110;
-	int human_face = 10, non_human_face = 100;
+	int picture_nums = 120;
+	int human_face = 20, non_human_face = 100;
 	int feature_numbers = 0;
-	int Tt_training = 40;
+	cout << "viola and jones feature detecting algorithm" << endl;
+	cout << "training times: ";
+	int Tt_training = 0;
+	cin >> Tt_training;
+	
 	integral_image *inter_ig;
 	feature_detecting *ft_dt;
 	std::string to_s;
 	database<int> *data = new database<int>[picture_nums]();
 	Mat image;
 	int det_true_false;
+	cout << "producing integral images" << endl;
 	for (int i = 0; i < picture_nums; i++) {
-		if (i < 10){
+		if (i < human_face){
 			to_s = to_string(i + 1);
 			image = imread("faces_data/1 (" + to_s + ").bmp", CV_LOAD_IMAGE_GRAYSCALE);
 			det_true_false = 1;
 		}
 		else {
-			to_s = to_string(i - 10 + 1);
+			to_s = to_string(i - human_face + 1);
 			image = imread("faces_data/noface (" + to_s + ").bmp", CV_LOAD_IMAGE_GRAYSCALE);
 			det_true_false = 0;
 		}
@@ -61,7 +67,7 @@ int main(int argc, char **argv) {
 		//cout << "numbers:" << i << endl;
 		//(data + i)->checking_array_integral(); //checking point
 	}
-
+	time_t start = time(NULL);
 	//--====>需要訓練五次
 	//1.正規化權重，使得Wt具有機率分佈
 	weight_calculating *wt_cal = new weight_calculating(picture_nums, human_face, non_human_face, data);
@@ -78,7 +84,7 @@ int main(int argc, char **argv) {
 		error_rate<double> *error_r = new error_rate<double>(feature_numbers);
 
 		detect_correct_wrong_table<int> *detect_y_n = new detect_correct_wrong_table<int>(feature_numbers, picture_nums);
-		cout << "waiting for process..." << endl;
+		cout << "waiting for training process..." << endl;
 		for (int select_feature_j = 0; select_feature_j < feature_numbers; select_feature_j++) { //feature_numbers變數 43200 (instead of)
 			for (int n = 0; n < picture_nums; n++) {
 				s_temp->input_temp_feature((data + n)->select_output_pivot(select_feature_j), n);
@@ -126,7 +132,7 @@ int main(int argc, char **argv) {
 	delete wt_cal;
 	cout << "====================" << endl;
 	cout << "end" << endl;
-
+	time_t end = time(NULL);
 	//version01 edit: add The final strong classifier for the function by using the cargos
 	cout << "now testing" << endl;
 
@@ -137,13 +143,13 @@ int main(int argc, char **argv) {
 	for (int i = 0; i < picture_nums; i++)
 	{
 		strong_classifier *st_clfer = new strong_classifier(result);
-		if (i < 10) {
+		if (i < human_face) {
 			to_s = to_string(i + 1);
 			image_testing = imread("faces_data/1 (" + to_s + ").bmp", CV_LOAD_IMAGE_GRAYSCALE);
 			det_true_false = 1;
 		}
 		else {
-			to_s = to_string(i - 10 + 1);
+			to_s = to_string(i - human_face + 1);
 			image_testing = imread("faces_data/noface (" + to_s + ").bmp", CV_LOAD_IMAGE_GRAYSCALE);
 			det_true_false = 0;
 		}
@@ -171,6 +177,8 @@ int main(int argc, char **argv) {
 	}
 	//strong classifier algorithm
 	cout << endl;
+	cout << "training times: " << Tt_training << endl;
+	cout << "elapse of training: " << end - start << " sec" << endl;
 	waitKey(0);
 	system("pause");
 	return 0;

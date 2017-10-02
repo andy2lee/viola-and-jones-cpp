@@ -11,7 +11,7 @@ class database
 private:
 	T **array_image;
 	T **array_integral;
-	T *array_feature = new T[43200];
+	T *array_feature = new T[86400];//change
 	T rows_size, cols_size;
 	double weight;
 	int boolean_true_false;
